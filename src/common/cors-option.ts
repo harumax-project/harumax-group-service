@@ -37,6 +37,7 @@ export const CORS_OPTIONS: CorsOptions = {
   },
   credentials: true,
   optionsSuccessStatus: 200,
+  // allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, x-apigateway-api-userinfo',
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
   methods: 'GET,PUT,POST,DELETE,UPDATE,PATCH,OPTIONS',
 }
