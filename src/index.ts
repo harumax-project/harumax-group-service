@@ -1,7 +1,10 @@
 import express from 'express'
 import cors from 'cors'
-import { CORS_OPTIONS } from './common/cors-option'
-import { AUTH_GUARD } from './common/auth-guard'
+import { CORS_OPTIONS } from './middlewares/cors-option'
+import { AUTH_GUARD } from './middlewares/auth-guard'
+import { FirebaseAdmin } from './common-lib/firebase-admin'
+
+export const FIREBASE = new FirebaseAdmin()
 
 const app = express()
 app.use(express.json())
