@@ -11,7 +11,8 @@ export const AUTH_GUARD = function (
     const headers = req.headers
     const authorization = headers.authorization
     const apiUserInfo = headers['x-apigateway-api-userinfo']
-    console.log(headers)
+    console.log('api user info', apiUserInfo)
+    console.log('auth', authorization)
 
     if (!authorization || !apiUserInfo) {
       throw new Error('no headers')
