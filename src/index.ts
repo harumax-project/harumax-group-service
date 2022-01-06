@@ -8,12 +8,10 @@ app.use(express.json())
 app.use(cors(CORS_OPTIONS))
 
 app.get('/', (req, res) => {
-  const headers = req.headers
   res.send('welcome to harumax group service!')
 })
 
-app.get('/secure', AUTH_GUARD, (req, res) => {
-  console.log(res.locals.decodedToken)
+app.get('/test', AUTH_GUARD, (req, res) => {
   res.send('welcome to harumax group service!')
 })
 
