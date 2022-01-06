@@ -11,6 +11,7 @@ export const AUTH_GUARD = function (
     const headers = req.headers
     const authorization = headers.authorization
     const apiUserInfo = headers['x-apigateway-api-userinfo']
+    console.log(headers)
 
     if (!authorization || !apiUserInfo) {
       throw new Error('no headers')
@@ -21,7 +22,7 @@ export const AUTH_GUARD = function (
     const isIssSecure = decodedToken.iss === process.env.ISS
 
     if (!isIssSecure) {
-      throw new Error('no headers')
+      throw new Error('no iss')
     }
     res.locals.decodedToken = decodedToken
     next()
