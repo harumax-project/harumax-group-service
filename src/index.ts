@@ -6,18 +6,17 @@ import { AUTH_GUARD } from './common/auth-guard'
 const app = express()
 app.use(express.json())
 app.use(cors(CORS_OPTIONS))
-app.use('/secure', AUTH_GUARD)
 
-app.route('/').get((req, res) => {
+app.get('/', (req, res) => {
   const headers = req.headers
   console.log(headers)
   res.send('welcome to harumax group service!')
 })
 
-app.route('/secure').get((req, res) => {
+app.get('/secure', AUTH_GUARD, (req, res) => {
+  console.log(res.locals.decodedToken)
   res.send('welcome to harumax group service!')
 })
-
 
 const port = process.env.PORT || 3100
 app.listen(port, () => {

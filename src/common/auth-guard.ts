@@ -7,19 +7,26 @@ export const AUTH_GUARD = function (
   res: Response,
   next: NextFunction
 ) {
-  const headers = req.headers
-  const authentication = headers.authorization
-  const apiUserInfo = headers['x-apigateway-api-userinfo']
+  try {
+    const headers = req.headers
+    const authorization = headers.authorization
+    const apiUserInfo = headers['x-apigateway-api-userinfo']
 
-  if (!authentication || !apiUserInfo) {
-    res.status(403)
-  }
-  const decodedToken = jwt_decode(apiUserInfo as string, { header: true }) as UserInfo
-  const isIssSecure = decodedToken.iss === process.env.ISS
+    if (!authorization || !apiUserInfo) {
+      throw new Error('no headers')
+    }
+    const decodedToken = jwt_decode(apiUserInfo as string, {
+      header: true,
+    }) as UserInfo
+    const isIssSecure = decodedToken.iss === process.env.ISS
 
-  if (!isIssSecure) {
-    res.status(403)
+    if (!isIssSecure) {
+      throw new Error('no headers')
+    }
+    res.locals.decodedToken = decodedToken
+    next()
+  } catch (e) {
+    console.log(e)
+    res.status(403).send({ error: 'Forbidden' })
   }
-  res.locals.decodedToken = decodedToken
-  next()
 }
