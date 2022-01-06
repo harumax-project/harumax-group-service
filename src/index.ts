@@ -13,6 +13,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/secure', AUTH_GUARD, (req, res) => {
+  const headers = req.headers
+  console.log(headers)
+  console.log(res.locals.decodedToken)
   res.send('welcome to harumax group service!')
 })
 
