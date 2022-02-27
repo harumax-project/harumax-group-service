@@ -1,3 +1,4 @@
+import { FieldValue } from 'firebase-admin/firestore';
 import * as admin from 'firebase-admin'
 import { Auth } from 'firebase-admin/lib/auth/auth'
 
@@ -34,5 +35,9 @@ export class FirebaseAdmin {
 
   get auth(): Auth {
     return this.adminFirebaseAuth
+  }
+
+  public getCurrentTimestamp() {
+    return FieldValue.serverTimestamp()
   }
 }
