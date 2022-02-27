@@ -14,12 +14,21 @@ app.get('/', (req, res) => {
   res.send('welcome to harumax group service!')
 })
 
-app.get('/hoge', async (req, res) => {
-  res.send('welcome to harumax group service!')
+app.get('/groups', AUTH_GUARD, async (req, res) => {
 })
 
+app.get('/groups/:id', AUTH_GUARD, async (req, res) => {
+})
+
+app.get('/groups/users', AUTH_GUARD, async (req, res) => {
+})
+
+app.get('/groups/users/:id', AUTH_GUARD, async (req, res) => {
+})
+
+
+
 app.get('/test', AUTH_GUARD, (req, res) => {
-  console.log(res.locals.decodedToken)
   res.send('welcome to harumax group service!')
 })
 
